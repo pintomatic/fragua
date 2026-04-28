@@ -30,25 +30,39 @@ Plan → CRITICON → MANAYER → CRITICON
 
 ---
 
-## Why Sonnet suddenly works
+## What actually forced this
 
-The old problem wasn't Sonnet's capability. It was that I was asking Sonnet to simultaneously figure out *what* to build and *how* to build it, in a context window that was already bloated with everything from the last two hours of conversation.
+I was happily running Opus 4.6 as my default. Then Opus 4.7 dropped and I hit 70% of my monthly budget in a single day. One day.
 
-FRAGUA separates those things. By the time Sonnet (as the coder) sees the task, CRITICON has already validated the design across multiple Opus rounds. The plan is airtight. Sonnet doesn't need to reason about architecture — it just executes a precise spec. That's exactly what it's good at.
+That's when I realised I had a structural problem, not a model problem. Every new model generation is going to be more capable and more expensive. If your workflow requires the most powerful model to function, you're on a treadmill that only gets more expensive. The answer can't be "wait for prices to drop." The answer has to be "fix the workflow."
+
+The uncomfortable truth is that what I was doing — defaulting to Opus because I didn't trust Sonnet — was actually a symptom of bad process. I wasn't trusting Sonnet because my context was a mess. The model was being asked to simultaneously explore, design, implement, and debug in a single thread. That's a hard job. Of course Opus did it better. Of course Sonnet stumbled.
+
+The fix turned out to be software engineering principles that have existed for 50 years: spec before build, separation of concerns, design review, code review. We just hadn't applied them consistently to AI-assisted development.
+
+---
+
+## Why Sonnet works now
+
+The old problem wasn't Sonnet's capability. It was that I was asking Sonnet to simultaneously figure out *what* to build and *how* to build it, in a context window already bloated with everything from the last two hours of conversation.
+
+FRAGUA separates those things. By the time Sonnet (as the coder) sees the task, CRITICON has already stress-tested the design across multiple Opus rounds. The plan is airtight. Sonnet doesn't need to reason about architecture — it just executes a precise spec. That's exactly what it's good at.
 
 The reviewer catches correctness issues. CRITICON catches runtime issues. You apply judgment. Each role does one thing in a clean context.
 
-The result: Sonnet executing a CRITICON-approved plan produces better output than Opus winging it from a vague prompt. And it costs a fraction.
+The result: Sonnet executing a CRITICON-approved plan consistently produces better output than Opus winging it from a vague prompt. And costs a fraction.
 
 ---
 
 ## The token math
 
-The real saving isn't CRITICON or MANAYER individually. It's that you eliminate the most expensive thing in AI development: mid-implementation discovery that the design was wrong.
+The real saving isn't CRITICON or MANAYER individually. It's eliminating the most expensive thing in AI development: mid-implementation discovery that the design was wrong.
 
-When you realize halfway through a 3-agent build that you had the wrong mental model of an API, the cost isn't just the tokens you spent — it's the tokens to undo it, explain what happened, course-correct, and rebuild. That spiral is where budgets go.
+When you realize halfway through a build that you had the wrong mental model of an API, the cost isn't just the tokens you spent — it's the tokens to undo it, explain what happened, course-correct, and rebuild. That spiral is where budgets go.
 
 CRITICON runs before the build. Plan critiques are free to fix. A Markdown document is weightless. The same discovery in implementation costs hours.
+
+This also future-proofs the workflow. FRAGUA gets *more* efficient as models improve, not less — because better Opus means sharper critiques, and better Sonnet means cleaner execution. The process scales. The "throw the best model at everything" approach doesn't.
 
 ---
 
